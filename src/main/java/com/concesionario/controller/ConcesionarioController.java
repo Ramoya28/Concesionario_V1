@@ -1,7 +1,9 @@
 package com.concesionario.controller;
 
 import com.concesionario.domain.Categoria;
+import com.concesionario.domain.Usuario;
 import com.concesionario.service.CategoriaService;
+import com.concesionario.service.UsuarioService;
 import com.concesionario.service.impl.FirebaseStorageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class ConcesionarioController {
     
     @Autowired
     private CategoriaService marcasService;
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping("/listado")
     public String inicio(Model model) {
@@ -63,6 +67,32 @@ public class ConcesionarioController {
         marcas = marcasService.getCategoria(marcas);
         model.addAttribute("marcas", marcas);
         return "/marcas/modifica";
+    }
+    
+    /*--------USUARIO-------*/
+    
+    @GetMapping("/usuario")
+    public String registroUsuario(Usuario usuario) {
+        return "/marcas/usuario";
+    }
+    
+    @GetMapping("/usuario/nuevo")
+    public String formualarioRegistro(Model model, Usuario usuario) {
+        model.addAttribute("usuario", usuario);
+        return "usuarioNuevo";
+    }
+    
+    @PostMapping("/usuario")
+    public String guardarUsuario(Usuario usuario){
+        usuarioService.save(usuario);
+        return "redirect:/marcas/usuario";
+    }
+    
+    
+    @GetMapping("/eliminar/{idUsuario}")
+    public String eliminarUsuario(Usuario usuario) {
+       usuarioService.delete(usuario);
+        return "redirect:/marcas/usuario";
     }
     
 }
