@@ -185,5 +185,51 @@
                 </div>
             </div>
         </section>
+        
+      <!-- 5 que se utiliza para el form de registrar usuario -->
+      
+      
+      <section th:fragment="registroUsuario">
+            <div id="agregarUsuario" 
+                 tabindex="-1"  
+                 aria-hidden="true">
+                <div>
+                    <div>
+                        <div>
+                            <h5>Registro Usuario</h5>
+                        </div> 
+                        <form th:action="@{marcas/guardarUsuario}" th:object="${usuario}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="nombre">Nombre de Usuario</label>
+                                    <input type="text" class="form-control" name="nombre" required="true" placeholder="Ingrese su Nombre"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellido">Apellido del Usuario</label>
+                                    <input type="text" class="form-control" name="apellido" required="true" placeholder="Ingrese su Apellido"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numeroCedula">Ingrese su Cedula</label>
+                                    <input type="text" class="form-control" name="numeroCedula" required="true" placeholder="1-1234-5678"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="correoElectronico">Ingrese el Correo</label>
+                                    <input type="text" class="form-control" name="correoElectronico" required="true" placeholder="ejemplo@gmail.com"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contrasena">Ingrese la Contrasena</label>
+                                    <input type="text" class="form-control" name="contrasena" required="true" placeholder="********"/>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
     </body>
 </html>
