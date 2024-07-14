@@ -116,10 +116,10 @@ public class ConcesionarioController {
         return "redirect:/marcas/registro";
     }
 
-    @GetMapping("/eliminar/{idUsuario}")
+    /*@GetMapping("eliminar/{idUsuario}")
     public String eliminarUsuario(Usuario usuario) {
         usuarioService.delete(usuario);
         return "redirect:/marcas/usuario";
-    }
+    }*/
 
 }
