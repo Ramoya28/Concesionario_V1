@@ -22,7 +22,6 @@ public class ConcesionarioController {
 
     @Autowired
     private CategoriaService marcasService;
-
     @Autowired
     private UsuarioService usuarioService;
 
