@@ -33,6 +33,14 @@ public class ConcesionarioController {
         return "/marcas/listado";
     }
     
+    @GetMapping("/registro")
+    public String inicioU(Model model) {
+        var usuarios = usuarioService.getInformacion(0);
+        model.addAttribute("marcass", usuarios);
+        model.addAttribute("totalCategorias", usuarios.size());
+        return "/marcas/registro";
+    }
+    
     @GetMapping("/nuevo")
     public String marcasNuevo(Categoria marcas) {
         return "/marcas/modifica";
@@ -82,7 +90,7 @@ public class ConcesionarioController {
         return "usuarioNuevo";
     }
     
-    @PostMapping("/usuario")
+    @PostMapping("/guardarUsuario")
     public String guardarUsuario(Usuario usuario){
         usuarioService.save(usuario);
         return "redirect:/marcas/usuario";

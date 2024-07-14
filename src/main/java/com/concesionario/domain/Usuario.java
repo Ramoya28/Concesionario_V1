@@ -26,9 +26,8 @@ public class Usuario implements Serializable{
     
     private int idUsuario;
     private String nombre;
-    private String apellidos;
+    private String apellido;
     private String numeroCedula;
-    private String codigoUsuario;
     private String correoElectronico;
     private String contrasena;
 
@@ -37,7 +36,7 @@ public class Usuario implements Serializable{
 
     public Usuario(String usuario, String correoElectronico) {
         this.nombre = usuario;
-        this.apellidos = usuario;
+        this.apellido = usuario;
         this.correoElectronico = correoElectronico;
     }
 

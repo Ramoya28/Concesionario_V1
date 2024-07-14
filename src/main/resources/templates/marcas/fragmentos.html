@@ -191,22 +191,19 @@
       
       <section th:fragment="registroUsuario">
             <div id="agregarUsuario" 
-                 class="modal fade" 
-                 tabindex="-1" 
-                 aria-labelledby="exampleModalLabel" 
+                 tabindex="-1"  
                  aria-hidden="true">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title">Registro Usuario</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div>
+                    <div>
+                        <div>
+                            <h5>Registro Usuario</h5>
                         </div> 
-                        <form th:action="@{/usuario/guardar}" th:object="${usuario}"
+                        <form th:action="@{/guardarUsuario}" th:object="${usuario}"
                               method="POST" class="was-validated" enctype="multipart/form-data">
-                            <div class="modal-body">
+                            <div>
                                 <div class="mb-3">
                                     <label for="nombre">Nombre de Usuario</label>
-                                    <input type="text" class="form-control" name="nombre" th:object="${nombre}" placeholder="Ingrese su Nombre"/>
+                                    <input type="text" class="form-control" name="nombre" required="true" placeholder="Ingrese su Nombre"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="apellido">Apellido del Usuario</label>
@@ -217,19 +214,15 @@
                                     <input type="text" class="form-control" name="numeroCedula" required="true" placeholder="1-1234-5678"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="codigoUsuario">Ingrese su Codigo Usuario</label>
-                                    <input type="text" class="form-control" name="codigoUsuario" required="true" placeholder="AB1TR2"/>
-                                </div>
-                                <div class="mb-3">
                                     <label for="correoElectronico">Ingrese el Correo</label>
-                                    <input type="correo" class="form-control" name="correo" required="true" placeholder="ejemplo@gmail.com"/>
+                                    <input type="text" class="form-control" name="correoElectronico" required="true" placeholder="ejemplo@gmail.com"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="contrasena">Ingrese la Contrasena</label>
-                                    <input type="password" class="form-control" name="correo" required="true" placeholder="********"/>
+                                    <input type="text" class="form-control" name="contrasena" required="true" placeholder="********"/>
                                 </div>
                             </div>
-                            <div class="modal-footer">
+                            <div>
                                 <button class="btn btn-primary" type="submit">Guardar</button>
                             </div>
                         </form>
