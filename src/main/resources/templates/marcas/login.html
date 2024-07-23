@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Iniciar Sesión</title>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<div class="container">
+    <h2>Iniciar Sesión</h2>
+    <form th:action="@{/marcas/login}" method="post" class="was-validated">
+        <div class="mb-3">
+            <label for="correo">Correo Electrónico</label>
+            <input type="email" class="form-control" id="correo" name="correo" required>
+        </div>
+        <div class="mb-3">
+            <label for="contrasena">Contraseña</label>
+            <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+    </form>
+    <div th:if="${error != null}">
+        <p class="text-danger" th:text="${error}"></p>
+    </div>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>
