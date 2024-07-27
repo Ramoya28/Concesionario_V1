@@ -32,11 +32,7 @@ public class ConcesionarioController {
         model.addAttribute("totalCategorias", marcass.size());
         return "/marcas/listado";
     }
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> main
     @GetMapping("/registro")
     public String inicioU(Model model) {
         var usuarios = usuarioService.getInformacion(0);
@@ -44,9 +40,6 @@ public class ConcesionarioController {
         model.addAttribute("totalCategorias", usuarios.size());
         return "/marcas/registro";
     }
-<<<<<<< HEAD
-    
-=======
 
     @GetMapping("/login")
     public String login() {
@@ -69,7 +62,6 @@ public class ConcesionarioController {
         }
     }
 
->>>>>>> main
     @GetMapping("/nuevo")
     public String marcasNuevo(Categoria marcas) {
         return "/marcas/modifica";
@@ -105,44 +97,18 @@ public class ConcesionarioController {
         model.addAttribute("marcas", marcas);
         return "/marcas/modifica";
     }
-<<<<<<< HEAD
-    
-    /*--------USUARIO-------*/
-    
-=======
 
     /*--------USUARIO-------*/
->>>>>>> main
     @GetMapping("/usuario")
     public String registroUsuario(Usuario usuario) {
         return "/marcas/usuario";
     }
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> main
     @GetMapping("/usuario/nuevo")
     public String formualarioRegistro(Model model, Usuario usuario) {
         model.addAttribute("usuario", usuario);
         return "usuarioNuevo";
     }
-<<<<<<< HEAD
-    
-    @PostMapping("/guardarUsuario")
-    public String guardarUsuario(Usuario usuario){
-        usuarioService.save(usuario);
-        return "redirect:/marcas/usuario";
-    }
-    
-    
-    @GetMapping("/eliminar/{idUsuario}")
-    public String eliminarUsuario(Usuario usuario) {
-       usuarioService.delete(usuario);
-        return "redirect:/marcas/usuario";
-    }
-    
-=======
 
     @PostMapping("marcas/guardarUsuario")
     public String guardarUsuario(Usuario usuario) {
@@ -156,5 +122,4 @@ public class ConcesionarioController {
         return "redirect:/marcas/usuario";
     }*/
 
->>>>>>> main
 }

@@ -185,24 +185,17 @@
                 </div>
             </div>
         </section>
-        
-      <!-- 5 que se utiliza para el form de registrar usuario -->
-      
-      
-      <section th:fragment="registroUsuario">
+
+        <section th:fragment="registroUsuario">
             <div id="agregarUsuario" 
                  tabindex="-1"  
                  aria-hidden="true">
                 <div>
-                    <div>
+                    <div class="container">
                         <div>
-                            <h5>Registro Usuario</h5>
+                            <h2>Registro Usuario</h2>
                         </div> 
-<<<<<<< HEAD
-                        <form th:action="@{/guardarUsuario}" th:object="${usuario}"
-=======
                         <form th:action="@{marcas/guardarUsuario}" th:object="${usuario}"
->>>>>>> main
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div>
                                 <div class="mb-3">
@@ -219,19 +212,11 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="correoElectronico">Ingrese el Correo</label>
-<<<<<<< HEAD
-                                    <input type="text" class="form-control" name="correoElectronico" required="true" placeholder="ejemplo@gmail.com"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="contrasena">Ingrese la Contrasena</label>
-                                    <input type="text" class="form-control" name="contrasena" required="true" placeholder="********"/>
-=======
                                     <input type="correo" class="form-control" name="correoElectronico" required="true" placeholder="ejemplo@gmail.com"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="contrasena">Ingrese la Contrasena</label>
                                     <input type="password" class="form-control" name="contrasena" required="true" placeholder="********"/>
->>>>>>> main
                                 </div>
                             </div>
                             <div>
@@ -242,6 +227,6 @@
                 </div>
             </div>
         </section>
-      
+
     </body>
 </html>
