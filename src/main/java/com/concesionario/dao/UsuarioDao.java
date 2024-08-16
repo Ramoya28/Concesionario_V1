@@ -10,5 +10,5 @@ public interface UsuarioDao extends JpaRepository<Usuario, Long>{
     
     @Query("SELECT u FROM Usuario u WHERE u.correoElectronico = :correo AND u.contrasena = :contrasena")
     Usuario findByCorreoAndContrasena(@Param("correo") String correo, @Param("contrasena") String contrasena);
-    
+   
 }

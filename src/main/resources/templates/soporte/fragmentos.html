@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Concesionario</title>
+    </head>
+    <body>
+        <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarSoporte">
+                            <center> <i class="fas fa-plus"></i> [[#{soporte.agregar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2 Fragmento para agregar categoria, es la ventana modal -->
+        <section th:fragment="agregarSoporte">
+            <div id="agregarSoporte" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{soporte.agregar}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/soporte/guardar}" th:object="${soporte}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="titulo">[[#{soporte.titulo}]]</label>
+                                    <input type="text" class="form-control" name="titulo" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nombre_completo">[[#{soporte.nombre_completo}]]</label>
+                                    <input type="text" class="form-control" name="nombre_completo" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefono">[[#{soporte.telefono}]]</label>
+                                    <input type="text" class="form-control" name="telefono" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email">[[#{soporte.email}]]</label>
+                                    <input type="text" class="form-control" name="email" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="descripcion">[[#{soporte.descripcion}]]</label>
+                                    <input type="text" class="form-control" name="descripcion" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="activo">[[#{soporte.activo}]]</label>
+                                    <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Enviar </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

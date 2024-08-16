@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Concesionario</title>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+
+        <section class="content-section bg-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Formulario de Soporte Técnico</h2>
+                            <p class="lead">Si desea soporte técnico por favor ingrese los datos solicitados y uno de nuestros técnicos solucionará el problema a la mayor brevedad posible</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+        <section th:replace="~{soporte/fragmentos :: botonesAgregar}"/>
+        <section th:replace="~{soporte/fragmentos :: agregarSoporte}"/> 
+
+        <footer th:replace="~{layout/plantilla :: footer}"/>      
+    </body>
+</html>

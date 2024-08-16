@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Información del Auto</title>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+
+        <section th:replace="~{buscar/fragmentos :: listadoAutos}"/>
+
+        <footer th:replace="~{layout/plantilla :: footer}"/>      
+    </body>
+</html>

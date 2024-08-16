@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Concesionario Alfaro</title>
+    </head>
+    <body>
+        <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarSucursal">
+                            <i class="fas fa-plus"></i> [[#{marcas.agregar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2 Fragmento para agregar marcas, es la ventana modal -->
+        <section th:fragment="agregarSucursal">
+            <div id="agregarSucursal" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{marcas.agregar}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{sucursal/guardarSucursal}" th:object="${sucursal}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nombreSucursal">Nombre de Sucursal</label>
+                                    <input type="text" class="form-control" name="nombreSucursal" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ubicacion">Ubicacion</label>
+                                    <input type="text" class="form-control" name="ubicacion" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="horarioApertura">Ingrese la hora de Apertura</label>
+                                    <input type="text" class="form-control" name="horarioApertura" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="horarioCierre">Ingrese la hora de Cierre</label>
+                                    <input type="text" class="form-control" name="horarioCierre" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numeroTelefono">Ingrese el numero de telefono</label>
+                                    <input type="text" class="form-control" name="numeroTelefono" required="true"/>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 Sección principal para mostrar la informaccion de la entidad marcas -->
+        <section th:fragment="listadoSucursal" id="sucursal">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{marcas.listado}]]</h4>
+                            </div>
+                            <div th:if="${sucursal != null and !sucursal.empty}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr><th>#</th>
+                                            <th>Nombre Sucursal</th>
+                                            <th>Numero Telefono</th>
+                                            <th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="sucursal, contador : ${sucursal}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${sucursal.nombreSucursal}]]</td>
+                                            <td>[[${sucursal.numeroTelefono}]]</td>
+                                            <td><a th:href="@{/sucursal/eliminar/}+${sucursal.idSucursal}"
+                                                   class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
+                                                <a th:href="@{/sucursal/modificar/}+${sucursal.idSucursal}"
+                                                   class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a>
+                                                <a th:href="@{/sucursal/informacion/}+${sucursal.idSucursal}"
+                                                   class="btn btn-info">
+                                                    <i></i> &#8505;Informacion</a></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${sucursal == null or sucursal.empty}">
+                                <span>[[#{lista.vacia}]]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                                <h3>Total Sucursales</h3>
+                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${totalSucursals}]]</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4 Fragmento que se utiliza en la página modifca.html -->
+        <section th:fragment="editarSucursal">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST"
+                          th:action="@{/sucursal/guardarSucursal}" 
+                          th:object="${sucursal}"
+                          class="was-validated"                          
+                          enctype="multipart/form-data">
+                        <input type="hidden" name="idSucursal" th:field="*{idSucursal}"/>
+                        <section th:replace="~{sucursal/fragmentos :: botonesEditar}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>[[#{accion.actualizar}]]</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="nombreSucursal">Nombre de Sucursal</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="nombreSucursal" th:field="*{nombreSucursal}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="ubicacion">Ubicacion</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="ubicacion" th:field="*{ubicacion}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="horarioApertura">Ingrese la hora de Apertura</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="horarioApertura" th:field="*{horarioApertura}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="horarioCierre">Ingrese la hora de Cierre</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="horarioCierre" th:field="*{horarioCierre}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="numeroTelefono">Ingrese el numero de telefono</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="numeroTelefono" th:field="*{numeroTelefono}"
+                                                           required="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
+        <section th:fragment="botonesEditar">
+            <div class="container py-4 mb-4 bg-light">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/sucursal/listado}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">                                
+                        <a th:href="@{/sucursal/eliminar/}+${sucursal.idSucursal}"
+                           class="btn btn-danger">
+                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section th:fragment="botonesInformacion">
+            <div class="container py-4 mb-4 bg-light">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/sucursal/listado}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section th:fragment="informacionSucursal">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST"
+                          th:action="@{/sucursal/informacion}" 
+                          th:object="${sucursal}"
+                          class="was-validated"                          
+                          enctype="multipart/form-data">
+                        <input type="hidden" name="idSucursal" th:field="*{idSucursal}"/>
+                        <section th:replace="~{sucursal/fragmentos :: botonesInformacion}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>Informacion de la Sucursal</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="nombreSucursal">Nombre de Sucursal</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="nombreSucursal" th:field="*{nombreSucursal}"
+                                                           required="true" disabled="">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="ubicacion">Ubicacion</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="ubicacion" th:field="*{ubicacion}"
+                                                           required="true" disabled="">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="horarioApertura">Ingrese la hora de Apertura</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="horarioApertura" th:field="*{horarioApertura}"
+                                                           required="true" disabled="">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="horarioCierre">Ingrese la hora de Cierre</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="horarioCierre" th:field="*{horarioCierre}"
+                                                           required="true" disabled="">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="numeroTelefono">Ingrese el numero de telefono</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="numeroTelefono" th:field="*{numeroTelefono}"
+                                                           required="true" disabled="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

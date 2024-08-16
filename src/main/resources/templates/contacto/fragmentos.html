@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Concesionario</title>
+    </head>
+    <body>
+        <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarContacto">
+                            <center> <i class="fas fa-plus"></i> [[#{contacto.agregar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2 Fragmento para agregar categoria, es la ventana modal -->
+        <section th:fragment="agregarContacto">
+            <div id="agregarContacto" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{contacto.agregar}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/contacto/guardar}" th:object="${contacto}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nombre_completo">[[#{contacto.nombre}]]</label>
+                                    <input type="text" class="form-control" name="nombre_completo" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="primer_apellido">[[#{contacto.apellido1}]]</label>
+                                    <input type="text" class="form-control" name="primer_apellido" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="segundo_apellido">[[#{contacto.apellido2}]]</label>
+                                    <input type="text" class="form-control" name="segundo_apellido" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email">[[#{contacto.email}]]</label>
+                                    <input type="text" class="form-control" name="email" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefono">[[#{contacto.telefono}]]</label>
+                                    <input type="text" class="form-control" name="telefono" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="activo">[[#{contacto.activo}]]</label>
+                                    <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section th:fragment="informacion" class="py-4 mb-4 bg-light">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1>Página Principal</h1>
+                        <p>Bienvenido a la página principal. Haga clic en el botón para ver más detalles.</p>
+                        <a href="/detalles" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

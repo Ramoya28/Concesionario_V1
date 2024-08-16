@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Concesionario</title>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+
+        <section class="content-section bg-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Formulario de Contacto</h2>
+                            <p class="lead">Si desea que uno de nuestros agentes se ponga en contacto con usted, dejemos sus datos a través del botón Agregar Contacto</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+        <section th:replace="~{contacto/fragmentos :: botonesAgregar}"/>
+        <section th:replace="~{contacto/fragmentos :: agregarContacto}"/> 
+
+        <footer th:replace="~{layout/plantilla :: footer}"/>      
+    </body>
+</html>
