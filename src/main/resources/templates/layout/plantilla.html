@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head th:fragment="head">
         <title>Concesionario Alfaro</title>
         <meta charset="UTF-8"/>
@@ -12,7 +13,7 @@
         <style>
             .navbar-custom {
                 background-color: #f2e3d5;
-                padding: 1rem 0; /* Aumenta el grosor de la línea */
+                padding: 1rem 0;
             }
             .navbar-custom .nav-link,
             .navbar-custom .navbar-brand,
@@ -25,6 +26,14 @@
             .footer-custom {
                 background-color: #3ca6a6 !important;
             }
+            .custom-color {
+                color: #3ca6a6 !important;
+            }
+            .custom-btn {
+                background-color: #3ca6a6 !important;
+                color: white !important;
+                border: none;
+            }
         </style>
     </head>
     <body>
@@ -36,25 +45,41 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav" sec:authorize='hasRole("ROLE_ADMIN")'>
                             <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/marcas/listado}">[[#{plantilla.marcass}]]</a></li>
-                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/buscar/listado}">[[#{plantilla.buscar}]]</a></li>                            
-                            <!--li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/producto/listado}">[[#{plantilla.productos}]]</a></li-->
+                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/buscar/listado}">[[#{plantilla.buscar}]]</a></li>
                             <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/marcas/registro}">Registro Usuario</a></li>
-                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/marcas/login}">Iniciar Sesion</a></li>
+                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/login}">Iniciar Sesion</a></li>
                             <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/sucursal/listado}">Sucursales</a></li>
                             <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/contacto/listado}">Contactenos</a></li>
                             <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/soporte/listado}">Soporte Técnico</a></li>
-
                         </ul>
                         <div class="col-md-3">
-                            <ul class="navbar-nav">                                
-                                <li class="nav-item px-2"><a class="nav-link" th:href="@{/(lang=es)}">ES</a></li>
-                                <li class="nav-item px-2"><a class="nav-link" th:href="@{/(lang=en)}">EN</a></li>
+                            <ul class="navbar-nav">
+                                <li class="nav-item px-2"><a class="nav-link custom-color" th:href="@{/(lang=es)}">ES</a></li>
+                                <li class="nav-item px-2"><a class="nav-link custom-color" th:href="@{/(lang=en)}">EN</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item px-2">
+                        <li class="nav-item custom-color my-auto">
+                            <i class="fas fa-user"></i>
+                            <span sec:authentication="name" class="custom-color">Pedro</span>
+                        </li>
+                        <a class="nav-link custom-color" th:href="@{/login}">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </a>
+                        <li class="nav-item my-auto">
+                            <form method="post" th:action="@{/logout}">
+                                <button class="btn custom-btn">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </button>
+                            </form>
+                        </li>
+                    </li>
+                </ul>
             </nav>
             <section id="main-header" class="py-2 header-main text-white">
                 <div class="container">

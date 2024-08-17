@@ -6,45 +6,35 @@ package com.concesionario.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import lombok.Data;
 
 /**
  *
  * @author Jorge Alfaro
  */
-
 @Data
 @Entity
-@Table(name= "usuario")
-public class Usuario implements Serializable{
-    
-    private static final long seriaVersionUID = 1L; 
+@Table(name = "usuario")
+public class Usuario implements Serializable {
+
+    private static final long seriaVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    
-    private int idUsuario;
+    private Long idUsuario;
+    private String username;
+    private String password;
     private String nombre;
-    private String apellido;
-    private String numeroCedula;
-    private String correoElectronico;
-    private String contrasena;
+    private String apellidos;
+    private String correo;
+    private String telefono;
+    private String rutaImagen;
+    private boolean activo;
 
-    public Usuario() {
-    }
+    @OneToMany
+    @JoinColumn(name = "id_usuario")
+    List<Rol> roles;
 
-    public Usuario(String usuario, String correoElectronico) {
-        this.nombre = usuario;
-        this.apellido = usuario;
-        this.correoElectronico = correoElectronico;
-    }
-
-    
-    
-    
-    
-    
-    
-    
 }

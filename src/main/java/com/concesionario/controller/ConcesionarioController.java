@@ -3,7 +3,7 @@ package com.concesionario.controller;
 import com.concesionario.domain.Categoria;
 import com.concesionario.domain.Usuario;
 import com.concesionario.service.CategoriaService;
-import com.concesionario.service.UsuarioService;
+import com.concesionario.service.UsuarioDetailsService;
 import com.concesionario.service.impl.FirebaseStorageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,6 @@ public class ConcesionarioController {
 
     @Autowired
     private CategoriaService marcasService;
-    @Autowired
-    private UsuarioService usuarioService;
 
     @GetMapping("/listado")
     public String inicio(Model model) {
@@ -33,20 +31,15 @@ public class ConcesionarioController {
         return "/marcas/listado";
     }
 
-    @GetMapping("/registro")
+    /*@GetMapping("/registro")
     public String inicioU(Model model) {
         var usuarios = usuarioService.getInformacion(0);
         model.addAttribute("marcass", usuarios);
         model.addAttribute("totalCategorias", usuarios.size());
         return "/marcas/registro";
-    }
+    }*/
 
-    @GetMapping("/login")
-    public String login() {
-        return "/marcas/login";
-    }
-
-    @PostMapping("/login")
+    /*@PostMapping("/login")
     public String login(@RequestParam("correo") String correo,
             @RequestParam("contrasena") String contrasena,
             Model model) {
@@ -60,7 +53,7 @@ public class ConcesionarioController {
             model.addAttribute("error", "Correo o contraseña incorrectos");
             return "/marcas/login";
         }
-    }
+    }*/
 
     @GetMapping("/nuevo")
     public String marcasNuevo(Categoria marcas) {
@@ -98,7 +91,7 @@ public class ConcesionarioController {
         return "/marcas/modifica";
     }
 
-    /*--------USUARIO-------*/
+    /*--------USUARIO-------
     @GetMapping("/usuario")
     public String registroUsuario(Usuario usuario) {
         return "/marcas/usuario";
