@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
  * @author gabri
  */
 public interface AutoService {
+    
+    public Auto getAuto(Long idAuto);
 
     public List<Auto> getAuto(int idAuto);
 

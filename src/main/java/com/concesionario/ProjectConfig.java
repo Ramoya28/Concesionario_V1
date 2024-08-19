@@ -73,7 +73,7 @@ public class ProjectConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests((request) -> request
                 .requestMatchers("/", "/index", "/buscar/**", "/login/**",
                         "/contacto/**", "/marcas/**", "/soporte/**",
-                        "/sucursal/**", "/imagenes/**", "/js/**", "/webjars/**")
+                        "/sucursal/**", "/imagenes/**","/auto/**", "/js/**", "/webjars/**", "/registro/**")
                 .permitAll() //modificar vistas, se dejan todas abiertas temporalmente
                 .requestMatchers(
                         "/producto/nuevo", "/producto/guardar",
@@ -100,15 +100,17 @@ public class ProjectConfig implements WebMvcConfigurer {
 
     @Autowired
     private UserDetailsService userDetailsService;
-
-    /*@Autowired
+/*
+    @Autowired
     public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception {
         build.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }*/
 
+    
     @Autowired
     public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception {
         build.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance()); //Revisar después, el encoding me esta dando errores
     }
+
 
 }

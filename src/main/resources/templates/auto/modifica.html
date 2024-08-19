@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Modificar Auto - Concesionario Alfaro</title>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+
+        <!-- Formulario para modificar un auto -->
+        <div class="container mt-4">
+            <h2>Modificar Auto</h2>
+            <form method="POST"
+                  th:action="@{/auto/guardar}" 
+                  th:object="${auto}"
+                  class="was-validated"                          
+                  enctype="multipart/form-data">
+                <input type="hidden" name="idAuto" th:field="*{idAuto}"/>
+                
+                <div class="mb-3">
+                    <label for="marca">Marca</label>
+                    <input type="text" class="form-control" name="marca" th:field="*{marca}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="modelo">Modelo</label>
+                    <input type="text" class="form-control" name="modelo" th:field="*{modelo}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="estilo">Estilo</label>
+                    <input type="text" class="form-control" name="estilo" th:field="*{estilo}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="combustible">Combustible</label>
+                    <input type="text" class="form-control" name="combustible" th:field="*{combustible}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="transmision">Transmisión</label>
+                    <input type="text" class="form-control" name="transmision" th:field="*{transmision}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="provincia">Provincia</label>
+                    <input type="text" class="form-control" name="provincia" th:field="*{provincia}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="ano">Año</label>
+                    <input type="number" class="form-control" name="ano" th:field="*{ano}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="precio">Precio</label>
+                    <input type="text" class="form-control" name="precio" th:field="*{precio}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="rutaImagen">Ruta Imagen</label>
+                    <input type="text" class="form-control" name="rutaImagen" th:field="*{rutaImagen}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="activo">Activo</label>
+                    <input type="checkbox" class="form-check-input" th:field="*{activo}"/>
+                </div>
+                
+                <button type="submit" class="btn btn-success">Guardar cambios</button>
+            </form>
+        </div>
+
+        <footer th:replace="~{layout/plantilla :: footer}"/>      
+    </body>
+</html>

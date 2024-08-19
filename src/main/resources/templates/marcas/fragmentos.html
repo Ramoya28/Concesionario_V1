@@ -228,5 +228,58 @@
             </div>
         </section>
 
+        <section th:fragment="informacionAuto">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST" th:action="@{/auto/informacion}" th:object="${auto}" class="was-validated" enctype="multipart/form-data">
+                        <input type="hidden" name="idAuto" th:field="*{idAuto}"/>
+                        <div id="details">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>Información del Auto</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="marca">Marca</label>
+                                                    <input type="text" class="form-control" name="marca" th:field="*{marca}" required="true" disabled="">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="modelo">Modelo</label>
+                                                    <input type="text" class="form-control" name="modelo" th:field="*{modelo}" required="true" disabled="">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="ano">Año</label>
+                                                    <input type="text" class="form-control" name="ano" th:field="*{ano}" required="true" disabled="">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="precio">Precio</label>
+                                                    <input type="text" class="form-control" name="precio" th:field="*{precio}" required="true" disabled="">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="combustible">Combustible</label>
+                                                    <input type="text" class="form-control" name="combustible" th:field="*{combustible}" required="true" disabled="">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="transmision">Transmisión</label>
+                                                    <input type="text" class="form-control" name="transmision" th:field="*{transmision}" required="true" disabled="">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="provincia">Provincia</label>
+                                                    <input type="text" class="form-control" name="provincia" th:field="*{provincia}" required="true" disabled="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
     </body>
 </html>

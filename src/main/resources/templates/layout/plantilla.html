@@ -47,9 +47,10 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <ul class="navbar-nav" sec:authorize='hasRole("ROLE_ADMIN")'>
                             <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/marcas/listado}">[[#{plantilla.marcass}]]</a></li>
+                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/auto/listado}">[[#{auto.carro}]]</a></li>
                             <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/buscar/listado}">[[#{plantilla.buscar}]]</a></li>
-                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/marcas/registro}">Registro Usuario</a></li>
-                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/login}">Iniciar Sesion</a></li>
+                            <!--<li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/marcas/registro}">Registro Usuario</a></li>-->
+                            <!--<li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/login}">Iniciar Sesion</a></li>-->
                             <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/sucursal/listado}">Sucursales</a></li>
                             <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/contacto/listado}">Contactenos</a></li>
                             <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/soporte/listado}">Soporte Técnico</a></li>

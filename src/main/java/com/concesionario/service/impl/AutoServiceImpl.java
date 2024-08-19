@@ -22,17 +22,24 @@ public class AutoServiceImpl implements AutoService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Auto> getAuto(int idAuto){
-        var lista=autoDao.findAll();
-        return lista;        
+    public Auto getAuto(Long idAuto) {
+        System.out.println("Buscando Auto con ID: " + idAuto);
+        return autoDao.findById(idAuto).orElse(null);
     }
 
     @Override
-    @Transactional(readOnly=true)
-     public Auto getAuto(Auto autos){
-         return autoDao.findById(autos.getIdAuto()).orElse(null);         
-     }
-     
+    @Transactional(readOnly = true)
+    public List<Auto> getAuto(int idAuto) {
+        var lista = autoDao.findAll();
+        return lista;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Auto getAuto(Auto autos) {
+        return autoDao.findById(autos.getIdAuto()).orElse(null);
+    }
+
     @Override
     @Transactional
     public void save(Auto autos) {
@@ -45,26 +52,26 @@ public class AutoServiceImpl implements AutoService {
     public void delete(Auto autos) {
         autoDao.delete(autos); //Eliminar el id (autos)
     }
-    
+
     @Override
     @Transactional(readOnly = true)
     public List<Auto> findByMarcaAndEstiloAndCombustibleAndTransmisionAndProvinciaAndAnoAndPrecio(String marca, String estilo, String combustible, String transmision, String provincia, int ano, double precio) {
         return autoDao.findByMarcaAndEstiloAndCombustibleAndTransmisionAndProvinciaAndAnoAndPrecio(marca, estilo, combustible, transmision, provincia, ano, precio);
     }
-    
+
     @Override
-    @Transactional(readOnly=true)
-    public List<Auto> metodoJPQL(@Param("marca") String marca, @Param("estilo") String estilo, 
-            @Param("combustible") String combustible, @Param("transmision") String transmision, 
-            @Param("provincia") String provincia, @Param("ano") int ano, @Param("precio") double precio){
-     return autoDao.metodoJPQL(marca, estilo, combustible, transmision, provincia, ano, precio);
+    @Transactional(readOnly = true)
+    public List<Auto> metodoJPQL(@Param("marca") String marca, @Param("estilo") String estilo,
+            @Param("combustible") String combustible, @Param("transmision") String transmision,
+            @Param("provincia") String provincia, @Param("ano") int ano, @Param("precio") double precio) {
+        return autoDao.metodoJPQL(marca, estilo, combustible, transmision, provincia, ano, precio);
     }
-    
+
     @Override
-    @Transactional(readOnly=true)
-    public List<Auto> metodoNativo(@Param("marca") String marca, @Param("estilo") String estilo, 
-            @Param("combustible") String combustible, @Param("transmision") String transmision, 
-            @Param("provincia") String provincia, @Param("ano") int ano, @Param("precio") double precio){
-       return autoDao.metodoNativo(marca, estilo, combustible, transmision, provincia, ano, precio);
+    @Transactional(readOnly = true)
+    public List<Auto> metodoNativo(@Param("marca") String marca, @Param("estilo") String estilo,
+            @Param("combustible") String combustible, @Param("transmision") String transmision,
+            @Param("provincia") String provincia, @Param("ano") int ano, @Param("precio") double precio) {
+        return autoDao.metodoNativo(marca, estilo, combustible, transmision, provincia, ano, precio);
     }
 }
