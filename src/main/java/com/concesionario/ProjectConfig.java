@@ -70,11 +70,11 @@ public class ProjectConfig implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((request) -> request
-                .requestMatchers("/", "/index", "/buscar/**", "/login/**",
-                        "/contacto/**", "/marcas/**", "/soporte/**",
-                        "/sucursal/**", "/imagenes/**","/auto/**", "/js/**", "/webjars/**", "/registro/**")
-                .permitAll() //modificar vistas, se dejan todas abiertas temporalmente
+                .authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/", "/index", "/login/**", "/imagenes/**", "/js/**", "/webjars/**", "/registro/**")
+                .permitAll()
+                .requestMatchers("/carrito/**", "/sucursal/**", "/buscar/**", "/contacto/**")
+                .hasAnyRole("USER", "ADMIN")
                 .requestMatchers(
                         "/producto/nuevo", "/producto/guardar",
                         "/producto/modificar/**", "/producto/eliminar/**",
@@ -82,15 +82,9 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/categoria/modificar/**", "/categoria/eliminar/**",
                         "/usuario/nuevo", "/usuario/guardar",
                         "/usuario/modificar/**", "/usuario/eliminar/**",
-                        "/reportes/**"
-                ).hasRole("ADMIN") //hay que modificar vistas
-                .requestMatchers(
-                        "/producto/listado",
-                        "/categoria/listado",
-                        "/usuario/listado"
-                ).hasAnyRole("ADMIN", "VENDEDOR")
-                .requestMatchers("/facturar/carrito")
-                .hasRole("USER") //hay que modificar vistas
+                        "/reportes/**", "/auto/**", "/contacto/**", "/marcas/**", "/soporte/**",
+                        "/buscar/**","/contacto/**", "/marcas/**","/sucursal/**", "/buscar/**"
+                ).hasRole("ADMIN")
                 )
                 .formLogin((form) -> form
                 .loginPage("/login").permitAll())
@@ -100,17 +94,15 @@ public class ProjectConfig implements WebMvcConfigurer {
 
     @Autowired
     private UserDetailsService userDetailsService;
-/*
+
     @Autowired
     public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception {
         build.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-    }*/
-
-    
-    @Autowired
-    public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception {
-        build.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance()); //Revisar después, el encoding me esta dando errores
     }
 
+    @Autowired
+    public void configurerGloball(AuthenticationManagerBuilder build) throws Exception {
+        build.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance()); //Revisar después, el encoding me esta dando errores
+    }
 
 }

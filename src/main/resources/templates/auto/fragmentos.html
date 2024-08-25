@@ -320,9 +320,8 @@
                                                            required="true" disabled="">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="rutaImagen">Ruta Imagen</label>
-                                                    <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);"/>
-                                                    <img id="blah" src="#" alt="your image" height="200"/>
+                                                    <label for="rutaImagen"></label>
+                                                    <img th:src="@{${auto.rutaImagen}}" alt="Imagen del auto" width="1000" th:if="${auto.rutaImagen != null}">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="activo">Activo</label>

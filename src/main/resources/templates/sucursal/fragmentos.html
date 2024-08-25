@@ -92,15 +92,18 @@
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${sucursal.nombreSucursal}]]</td>
                                             <td>[[${sucursal.numeroTelefono}]]</td>
-                                            <td><a th:href="@{/sucursal/eliminar/}+${sucursal.idSucursal}"
-                                                   class="btn btn-danger">
-                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
-                                                <a th:href="@{/sucursal/modificar/}+${sucursal.idSucursal}"
-                                                   class="btn btn-success">
-                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a>
-                                                <a th:href="@{/sucursal/informacion/}+${sucursal.idSucursal}"
-                                                   class="btn btn-info">
-                                                    <i></i> &#8505;Informacion</a></td></tr>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/sucursal/eliminar/}+${sucursal.idSucursal}" class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                                </a>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/sucursal/modificar/}+${sucursal.idSucursal}" class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
+                                                </a>
+                                                <a th:href="@{/sucursal/informacion/}+${sucursal.idSucursal}" class="btn btn-info">
+                                                    <i></i> &#8505;Informacion
+                                                </a>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -120,6 +123,7 @@
                 </div>
             </div>
         </section>
+
 
         <!-- 4 Fragmento que se utiliza en la página modifca.html -->
         <section th:fragment="editarSucursal">
