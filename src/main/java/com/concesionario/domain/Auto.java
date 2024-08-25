@@ -8,13 +8,12 @@ import lombok.Data;
  *
  * @author gabri
  */
-
 @Data //especificar que es una capa de datos
 @Entity //Esta clase esta enlazada a una tabla en la bd
 @Table(name = "auto") //Especificar cual entidad
 
-public class Auto implements Serializable{
-        
+public class Auto implements Serializable {
+
     private static final long seriaVersionUID = 1L; // Auto incremento en Java MySQL (AUTO_INCREMENT)  
 
     @Id
@@ -27,14 +26,19 @@ public class Auto implements Serializable{
     private String estilo;
     private String combustible;
     private String transmision;
-    private String provincia;    
-    private int ano;   
-    private float precio; 
+    private String provincia;
+    private int ano;
+    private float precio;
     private String rutaImagen;
-    private boolean activo;    
+    private boolean activo;
     
-    public Auto() {
-    }    
+    public Auto(){
+        
+    }
+
+    public Auto(Long idAuto) {
+        this.idAuto = idAuto;
+    }
 
     public Auto(long idAuto, String marca, String modelo, String estilo, String combustible, String transmision, String provincia, int ano, float precio, String rutaImagen, boolean activo) {
         this.idAuto = idAuto;
@@ -49,5 +53,5 @@ public class Auto implements Serializable{
         this.rutaImagen = rutaImagen;
         this.activo = activo;
     }
-    
+
 }

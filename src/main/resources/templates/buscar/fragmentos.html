@@ -367,12 +367,20 @@
                                 <p class="card-text" th:text="'Precio: ' + ${a.precio}"></p>
                             </div>
                             <div class="card-footer text-center">
-                                <a th:href="@{/contacto}" class="btn btn-primary">+ Contacto</a>
+                                <a th:href="@{/contacto/listado}" class="btn btn-primary">+ Contacto</a>
                             </div>
+                            <div class="card-footer text-center">
+                                <a th:href="@{/carrito/agregar/{idAuto}(idAuto=${a.idAuto})}" class="btn btn-light">
+                                    <i class="fas fa-cart-plus"></i> Añadir al Carrito
+                                </a>
+
+                            </div>
+
                     </div>
                 </div>
             </div>
         </section>
+
 
     </body>
 </html>
